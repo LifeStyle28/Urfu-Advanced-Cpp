@@ -1,7 +1,12 @@
 #include "figures.hpp"
 #include <cmath>
+#include <stdexcept>
 
-Rect::Rect(double width, double height) : width(width), height(height) {}
+Rect::Rect(double width, double height) : width(width), height(height) {
+    if (width < 0 || height < 0) {
+        throw LessThanZeroParam();
+    }
+}
 
 FigureType Rect::Type() const {
     return FigureType::RECTANGLE;
@@ -16,6 +21,9 @@ double Rect::Area() const {
 }
 
 Triangle::Triangle(double a, double b, double c) : a(a), b(b), c(c) {
+    if (a < 0 || b < 0 || c < 0) {
+        throw LessThanZeroParam();
+    }
     if (a + b <= c || a + c <= b || b + c <= a) {
         throw WrongTriangle();
     }
@@ -34,7 +42,11 @@ double Triangle::Area() const {
     return std::sqrt(p * (p - a) * (p - b) * (p - c));
 }
 
-Circle::Circle(double radius) : radius(radius) {}
+Circle::Circle(double radius) : radius(radius) {
+    if (radius < 0) {
+        throw LessThanZeroParam();
+    }
+}
 
 FigureType Circle::Type() const {
     return FigureType::CIRCLE;
@@ -59,12 +71,8 @@ std::unique_ptr<Figure> make_figure(FigureType type, double a, double b, double 
         case FigureType::CIRCLE:
             return std::make_unique<Circle>(a);
         case FigureType::TRIANGLE:
-            if (a + b <= c || a + c <= b || b + c <= a) {
-                throw WrongTriangle();
-            }
             return std::make_unique<Triangle>(a, b, c);
         default:
             throw std::invalid_argument("Unknown figure type");
     }
 }
-
