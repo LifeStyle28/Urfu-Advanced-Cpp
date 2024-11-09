@@ -39,7 +39,10 @@ int Matrix::GetCols() const {
 }
 
 bool Matrix::operator==(const Matrix& m2) const {
-    return rows == m2.rows && cols == m2.cols && data == m2.data;
+    if (rows != m2.rows || cols != m2.cols) {
+        return false;
+    }
+    return data == m2.data;
 }
 
 bool Matrix::operator!=(const Matrix& m2) const {
