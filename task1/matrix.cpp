@@ -26,13 +26,17 @@ void Matrix::Reset(int numRows, int numCols)
 
 int& Matrix::At(int row, int col)
 {
-    CheckBounds(row, col);
+     if (row < 0 || row >= rows || col < 0 || col >= cols) {
+            throw std::out_of_range("Index out of range");
+        }
         return data[row * cols + col];
 }
 
 const int& Matrix::At(int row, int col) const
 {
-    CheckBounds(row, col);
+     if (row < 0 || row >= rows || col < 0 || col >= cols) {
+            throw std::out_of_range("Index out of range");
+        }
         return data[row * cols + col];
 }
 
@@ -70,13 +74,5 @@ Matrix Matrix::operator+(const Matrix& m2)
 
         return result;
     }
-
-    void CheckBounds(int row, int col) {
-        if (row < 0 || row >= rows || col < 0 || col >= cols) {
-            throw std::out_of_range("Index out of range");
-        }
-    }
     
 ;
-
-
