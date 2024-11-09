@@ -59,8 +59,12 @@ std::unique_ptr<Figure> make_figure(FigureType type, double a, double b, double 
         case FigureType::CIRCLE:
             return std::make_unique<Circle>(a);
         case FigureType::TRIANGLE:
+            if (a + b <= c || a + c <= b || b + c <= a) {
+                throw WrongTriangle();
+            }
             return std::make_unique<Triangle>(a, b, c);
         default:
-            throw std::invalid_argument("");
+            throw std::invalid_argument("Unknown figure type");
     }
 }
+
