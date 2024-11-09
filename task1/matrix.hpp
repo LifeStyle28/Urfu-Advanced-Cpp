@@ -7,8 +7,6 @@ private:
   int rows;
   int cols;
   std::vector<int> data;
-  void CheckBounds(int row, int col) const;
-
 public:
   Matrix() = default;
   Matrix(int numRows, int numCols);
