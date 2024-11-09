@@ -1,18 +1,25 @@
 #pragma once
 
-class Matrix
-{
+#include <vector>
+
+class Matrix {
+private:
+  int rows;
+  int cols;
+  std::vector<int> data;
+  void CheckBounds(int row, int col) const;
+
 public:
-    Matrix() = default;
-    Matrix(int numRows, int numCols);
+  Matrix() = default;
+  Matrix(int numRows, int numCols);
 
-    void Reset(int numRows, int numCols);
-    int& At(int row, int col);
-    const int& At(int row, int col) const;
-    int GetRows() const;
-    int GetCols() const;
+  void Reset(int numRows, int numCols);
+  int &At(int row, int col);
+  const int &At(int row, int col) const;
+  int GetRows() const;
+  int GetCols() const;
 
-    bool operator==(const Matrix& m2);
-    bool operator!=(const Matrix& m2);
-    Matrix operator+(const Matrix& m2);
+  bool operator==(const Matrix &m2);
+  bool operator!=(const Matrix &m2);
+  Matrix operator+(const Matrix &m2);
 };
