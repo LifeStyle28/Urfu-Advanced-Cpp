@@ -1,48 +1,80 @@
 #include "matrix.hpp"
-
+#include <vector>
 #include <stdexcept>
 
-Matrix::Matrix(int numRows, int numCols)
+class Matrix
 {
-    // your implementation here
-}
+private:
+    int rows = 0;
+    int cols = 0;
+    std::vector<std::vector<int>> data;
 
-void Matrix::Reset(int numRows, int numCols)
-{
-    // your implementation here
-}
+public:
+    Matrix::Matrix(int numRows, int numCols)
+    {
+        Reset(numRows, numCols);
+    }
 
-int& Matrix::At(int row, int col)
-{
-    // your implementation here
-}
+    void Matrix::Reset(int numRows, int numCols)
+    {
+        if (numRows <= 0 || numCols <= 0) {
+            rows = 0;
+            cols = 0;
+            data.clear();
+        } else {
+            rows = numRows;
+            cols = numCols;
+            data.assign(rows, std::vector<int>(cols, 0));
+        }
+    }
 
-const int& Matrix::At(int row, int col) const
-{
-    // your implementation here
-}
+    int& Matrix::At(int row, int col)
+    {
+        if (row < 0 || row >= rows || col < 0 || col >= cols) {
+            throw std::out_of_range("");
+        }
+        return data[row][col];
+    }
 
-int Matrix::GetRows() const
-{
-    // your implementation here
-}
+    const int& Matrix::At(int row, int col) const
+    {
+        if (row < 0 || row >= rows || col < 0 || col >= cols) {
+            throw std::out_of_range("");
+        }
+        return data[row][col];
+    }
 
-int Matrix::GetCols() const
-{
-    // your implementation here
-}
+    int Matrix::GetRows() const
+    {
+        return rows;
+    }
 
-bool Matrix::operator==(const Matrix& m2)
-{
-    // your implementation here
-}
+    int Matrix::GetCols() const
+    {
+        return cols;
+    }
 
-bool Matrix::operator!=(const Matrix& m2)
-{
-    // your implementation here
-}
+    bool Matrix::operator==(const Matrix& m2)
+    {
+        return (rows == m2.rows && cols == m2.cols && data == m2.data);
+    }
 
-Matrix Matrix::operator+(const Matrix& m2)
-{
-    // your implementation here
-}
+    bool Matrix::operator!=(const Matrix& m2)
+    {
+        return !(*this == m2);
+    }
+
+    Matrix Matrix::operator+(const Matrix& m2)
+    {
+        if (rows != m2.rows || cols != m2.cols) {
+            throw std::invalid_argument("");
+        }
+        Matrix result(rows, cols);
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                result.data[i][j] = data[i][j] + m2.data[i][j];
+            }
+        }
+        return result;
+    }
+};
