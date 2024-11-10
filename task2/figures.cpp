@@ -73,6 +73,6 @@ std::unique_ptr<Figure> make_figure(FigureType type, double a, double b, double 
         case FigureType::TRIANGLE:
             return std::make_unique<Triangle>(a, b, c);
         default:
-            throw std::invalid_argument("Unknown figure type");
+            return nullptr;
     }
 }
