@@ -17,6 +17,7 @@ public:
 
     bool operator==(const Matrix& m2) const;
     Matrix operator+(const Matrix& m2) const;
+    bool operator!=(const Matrix& m2) const;
 
     friend std::istream& operator>>(std::istream& is, Matrix& matrix);
     friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix);

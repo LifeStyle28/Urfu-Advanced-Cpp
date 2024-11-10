@@ -38,6 +38,10 @@ bool Matrix::operator==(const Matrix& m2) const {
     return numRows == m2.numRows && numCols == m2.numCols && data == m2.data;
 }
 
+bool Matrix::operator!=(const Matrix& m2) const {
+    return !(*this == m2);
+}
+
 Matrix Matrix::operator+(const Matrix& m2) const {
     if (numRows != m2.numRows || numCols != m2.numCols) {
         throw std::invalid_argument("Matrix dimensions must match for addition");
