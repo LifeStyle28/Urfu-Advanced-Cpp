@@ -27,7 +27,11 @@ private:
     double height;
 
 public:
-    Rect(double a, double b) : length(a), height(b) {}
+    Rect(double a, double b) : length(a), height(b) 
+{ 
+    if (width < 0 || height < 0) {
+            throw LessThanZeroParam("Width or height can't be less than zero.");
+}
 
     FigureType Type() const override {
         return FigureType::RECTANGLE;
