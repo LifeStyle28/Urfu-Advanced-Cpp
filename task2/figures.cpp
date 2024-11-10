@@ -1,5 +1,7 @@
 #include "figures.hpp"
 
+static constexpr double PI = 3.14;
+
 #include <iostream>
 #include <memory>
 #include <stdexcept>
@@ -16,7 +18,7 @@ public:
     virtual FigureType Type() const = 0;
     virtual double Perimeter() const = 0;
     virtual double Area() const = 0;
-    virtual ~Figure() = default;
+    virtual ~Figure() = default; 
 };
 
 class Rect : public Figure {
@@ -115,5 +117,3 @@ class LessThanZeroParam : public std::invalid_argument {
 public:
     explicit LessThanZeroParam(const std::string& message) : std::invalid_argument(message) {}
 };
-
-static constexpr double PI = 3.14;
