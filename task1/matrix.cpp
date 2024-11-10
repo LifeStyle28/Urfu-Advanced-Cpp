@@ -4,7 +4,7 @@
 
 Matrix::Matrix(int numRows, int numCols) {
     if (numRows < 0 || numCols < 0) {
-        throw std::out_of_range("Matrix dimensions cannot be negative");
+        throw std::out_of_range("ERROR: Out of range!");
     }
     this->numRows = numRows;
     this->numCols = numCols;
@@ -13,7 +13,7 @@ Matrix::Matrix(int numRows, int numCols) {
 
 void Matrix::Reset(int numRows, int numCols) {
     if (numRows < 0 || numCols < 0) {
-        throw std::out_of_range("Matrix dimensions cannot be negative");
+        throw std::out_of_range("ERROR: Out of range!");
     }
     this->numRows = numRows;
     this->numCols = numCols;
@@ -22,14 +22,14 @@ void Matrix::Reset(int numRows, int numCols) {
 
 int& Matrix::At(int row, int col) {
     if (row < 0 || row >= numRows || col < 0 || col >= numCols) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("ERROR: Out of range!");
     }
     return data[row][col];
 }
 
 const int& Matrix::At(int row, int col) const {
     if (row < 0 || row >= numRows || col < 0 || col >= numCols) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("ERROR: Out of range!");
     }
     return data[row][col];
 }
@@ -44,7 +44,7 @@ bool Matrix::operator!=(const Matrix& m2) const {
 
 Matrix Matrix::operator+(const Matrix& m2) const {
     if (numRows != m2.numRows || numCols != m2.numCols) {
-        throw std::invalid_argument("Matrix dimensions must match for addition");
+        throw std::invalid_argument("ERROR: Incorrect matrix sizes!");
     }
     Matrix result(numRows, numCols);
     for (int i = 0; i < numRows; ++i) {
