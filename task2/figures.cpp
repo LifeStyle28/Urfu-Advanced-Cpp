@@ -16,7 +16,7 @@ public:
     virtual FigureType Type() const = 0;
     virtual double Perimeter() const = 0;
     virtual double Area() const = 0;
-    virtual ~Figure() = default; // Виртуальный деструктор
+    virtual ~Figure() = default;
 };
 
 class Rect : public Figure {
@@ -49,7 +49,7 @@ public:
         if (a <= 0 || b <= 0 || c <= 0) {
             throw LessThanZeroParam("Sides must be greater than zero.");
         }
-        // Проверка на существование треугольника
+        
         if (a + b <= c || a + c <= b || b + c <= a) {
             throw WrongTriangle("Triangle does not exist.");
         }
@@ -64,8 +64,8 @@ public:
     }
 
     double Area() const override {
-        double s = Perimeter() / 2; // Полупериметр
-        return std::sqrt(s * (s - a) * (s - b) * (s - c)); // Формула Герона
+        double s = Perimeter() / 2; 
+        return std::sqrt(s * (s - a) * (s - b) * (s - c)); 
     }
 };
 
@@ -85,11 +85,11 @@ public:
     }
 
     double Perimeter() const override {
-        return 2 * 3.14 * radius; // Периметр окружности
+        return 2 * 3.14 * radius; 
     }
 
     double Area() const override {
-        return 3.14 * radius * radius; // Площадь окружности
+        return 3.14 * radius * radius; 
     }
 };
 
