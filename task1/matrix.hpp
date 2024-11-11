@@ -37,6 +37,7 @@ public:
     friend istream& operator>>(istream& in, Matrix& matrix);
     friend ostream& operator<<(ostream& out, const Matrix& matrix);
     friend bool operator==(const Matrix& lhs, const Matrix& rhs);
+    friend bool operator!=(const Matrix& lhs, const Matrix& rhs);  // Объявляем оператор !=
     friend Matrix operator+(const Matrix& lhs, const Matrix& rhs);
 
 private:

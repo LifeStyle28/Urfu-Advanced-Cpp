@@ -70,6 +70,10 @@ bool operator==(const Matrix& lhs, const Matrix& rhs) {
     return lhs.num_rows == rhs.num_rows && lhs.num_cols == rhs.num_cols && lhs.data == rhs.data;
 }
 
+bool operator!=(const Matrix& lhs, const Matrix& rhs) {
+    return !(lhs == rhs);
+}
+
 Matrix operator+(const Matrix& lhs, const Matrix& rhs) {
     if (lhs.GetRows() != rhs.GetRows() || lhs.GetCols() != rhs.GetCols()) {
         throw invalid_argument("");
