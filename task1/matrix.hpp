@@ -6,7 +6,7 @@ private:
     int rows, cols;
     std::vector<int> Mat;
 public:
-    Matrix();
+    Matrix() = default;
     Matrix(int numRows, int numCols);
 
     void Reset(int numRows, int numCols);
