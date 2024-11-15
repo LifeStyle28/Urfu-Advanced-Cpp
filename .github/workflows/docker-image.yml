@@ -52,3 +52,26 @@ jobs:
 
     - name: Run tests
       run: cd task2/build && ctest
+
+  task3:
+    runs-on: ubuntu-22.04
+    container:
+      image: lifestyle288/urfucpp:latest
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      options: --name main-container
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependecies
+      run: |
+        cd task3
+        cp -R /app/tests/task3 tests
+        mkdir build
+        cd build
+        cmake ..
+        make -j4
+
+    - name: Run tests
+      run: cd task3/build && ctest
