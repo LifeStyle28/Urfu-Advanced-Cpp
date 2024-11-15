@@ -3,7 +3,6 @@
 #include <vector>
 #include <stdexcept>
 
-
 class Matrix {
 public:
     Matrix() : num_rows(0), num_cols(0) {}
@@ -12,7 +11,7 @@ public:
     Matrix(const Matrix& other) = default;
     Matrix& operator=(const Matrix& other) = default;
     
-    Matrix(Matrix&& other) noexcept : num_rows(other.num_rows), num_cols(other.num_cols), data(move(other.data)) {
+    Matrix(Matrix&& other) noexcept : num_rows(other.num_rows), num_cols(other.num_cols), data(std::move(other.data)) {
         other.num_rows = 0;
         other.num_cols = 0;
     }
@@ -20,7 +19,7 @@ public:
         if (this != &other) {
             num_rows = other.num_rows;
             num_cols = other.num_cols;
-            data = move(other.data);
+            data = std::move(other.data);
             other.num_rows = 0;
             other.num_cols = 0;
         }
@@ -33,14 +32,14 @@ public:
     int GetRows() const;
     int GetCols() const;
 
-    friend istream& operator>>(istream& in, Matrix& matrix);
-    friend ostream& operator<<(ostream& out, const Matrix& matrix);
+    friend std::istream& operator>>(std::istream& in, Matrix& matrix);
+    friend std::ostream& operator<<(std::ostream& out, const Matrix& matrix);
     friend bool operator==(const Matrix& lhs, const Matrix& rhs);
-    friend bool operator!=(const Matrix& lhs, const Matrix& rhs);  
+    friend bool operator!=(const Matrix& lhs, const Matrix& rhs);
     friend Matrix operator+(const Matrix& lhs, const Matrix& rhs);
 
 private:
     int num_rows;
     int num_cols;
-    vector<vector<int>> data;
+    std::vector<std::vector<int>> data;
 };
