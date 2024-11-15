@@ -7,18 +7,30 @@ Matrix::Matrix(int rows, int cols) {
     if (rows < 0 || cols < 0) {
         throw out_of_range("");
     }
-    num_rows = rows;
-    num_cols = cols;
-    data.assign(rows, vector<int>(cols, 0));
+    if (rows == 0 || cols == 0) {
+        num_rows = 0;
+        num_cols = 0;
+        data.clear();
+    } else {
+        num_rows = rows;
+        num_cols = cols;
+        data.assign(rows, vector<int>(cols, 0));
+    }
 }
 
 void Matrix::Reset(int rows, int cols) {
     if (rows < 0 || cols < 0) {
         throw out_of_range("");
     }
-    num_rows = rows;
-    num_cols = cols;
-    data.assign(rows, vector<int>(cols, 0));
+    if (rows == 0 || cols == 0) {
+        num_rows = 0;
+        num_cols = 0;
+        data.clear();
+    } else {
+        num_rows = rows;
+        num_cols = cols;
+        data.assign(rows, vector<int>(cols, 0));
+    }
 }
 
 int Matrix::At(int row, int col) const {
