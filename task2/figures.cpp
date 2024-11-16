@@ -122,3 +122,23 @@ class LessThanZeroParam : public std::invalid_argument {
 public:
     explicit LessThanZeroParam(const std::string& message) : std::invalid_argument(message) {}
 };
+
+int main() {
+    try {
+        auto rectangle = make_figure(FigureType::RECTANGLE, 5, 10);
+        std::cout << "Rectangle Area: " << rectangle->Area() << "\n";
+
+        auto circle = make_figure(FigureType::CIRCLE, 3);
+        std::cout << "Circle Area: " << circle->Area() << "\n";
+
+        auto triangle = make_figure(FigureType::TRIANGLE, 3, 4, 5);
+        std::cout << "Triangle Area: " << triangle->Area() << "\n";
+        
+        // Попытка создать неправильный треугольник
+        auto invalid_triangle = make_figure(FigureType::TRIANGLE, 1, 2, 3);
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+
+    return 0;
+}
