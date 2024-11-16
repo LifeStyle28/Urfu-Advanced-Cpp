@@ -74,3 +74,30 @@ private:
     int cols_ = 0;                     // Количество столбцов
     std::vector<std::vector<int>> data_; // Данные матрицы
 };
+
+int main() {
+    try {
+        Matrix m1(2, 3);
+        Matrix m2(2, 3);
+
+        // Заполнение матриц
+        m1.At(0, 0) = 1; m1.At(0, 1) = 2; m1.At(0, 2) = 3;
+        m1.At(1, 0) = 4; m1.At(1, 1) = 5; m1.At(1, 2) = 6;
+
+        m2.At(0, 0) = 7; m2.At(0, 1) = 8; m2.At(0, 2) = 9;
+        m2.At(1, 0) = 10; m2.At(1, 1) = 11; m2.At(1, 2) = 12;
+
+        Matrix m3 = m1 + m2;
+
+        for (int i = 0; i < m3.GetRows(); ++i) {
+            for (int j = 0; j < m3.GetCols(); ++j) {
+                std::cout << m3.At(i, j) << ' ';
+            }
+            std::cout << '\n';
+        }
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+
+    return 0;
+}
