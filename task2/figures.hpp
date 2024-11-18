@@ -22,10 +22,10 @@ class Rect : public Figure
 {
 private:
 double width;
-double heigth;
+double height;
 
 public: 
-    Rect(double width, double heigth);
+    Rect(double width, double height);
     FigureType Type() const override;
     double Perimeter() const override;
     double Area() const override;
