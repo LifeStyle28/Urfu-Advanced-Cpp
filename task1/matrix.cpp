@@ -12,9 +12,10 @@ void Matrix::Reset(int numRows, int numCols)
     numRows = nrows;
     numCols = ncols;
     data.assign(nrows, vector<int>(ncols, 0));
-    if (nrows < 0 || ncols < 0)
+    if (nrows <= 0 || ncols <= 0)
     {
-    	throw out_of_range("Error: Negative number");
+    	nrows = 0;
+	ncols = 0;
     }// your implementation here
 }
 
