@@ -1,9 +1,5 @@
 #include "figures.hpp"
 
-static constexpr double PI = 3.14;
-
-#include <iostream>
-#include <memory>
 #include <stdexcept>
 #include <cmath>
 
