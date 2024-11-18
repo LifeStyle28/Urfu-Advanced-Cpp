@@ -32,15 +32,15 @@ Triangle::Triangle(double a, double b, double c) : a(a), b(b), c(c) {
     }
 }
 
-FigureType Triangle::Type() const override {
+FigureType Triangle::Type() const {
     return FigureType::TRIANGLE;
 }
 
-double Triangle::Perimeter() const override {
+double Triangle::Perimeter() const {
     return a + b + c;
 }
 
-double Triangle::Area() const override {
+double Triangle::Area() const {
     double p = Perimeter() / 2; 
     return std::sqrt(p * (p - a) * (p - b) * (p - c)); 
 }
@@ -52,15 +52,15 @@ Circle::Circle(double a) : radius(a) {
     }
 }
 
-FigureType Circle::Type() const override {
+FigureType Circle::Type() const {
     return FigureType::CIRCLE;
 }
 
-double Circle::Perimeter() const override {
+double Circle::Perimeter() const {
     return 2 * PI * radius; 
 }
 
-double Circle::Area() const override {
+double Circle::Area() const {
     return PI * radius * radius; 
 }
 
