@@ -4,7 +4,7 @@
 
 Matrix::Matrix(int numRows, int numCols)
 {
-    Reset(numRows, numCols); // your implementation here
+    Reset(numRows, numCols);
 }
 
 void Matrix::Reset(int numRows, int numCols)
@@ -16,7 +16,7 @@ void Matrix::Reset(int numRows, int numCols)
     {
     	nrows = 0;
 	ncols = 0;
-    }// your implementation here
+    }
 }
 
 int& Matrix::At(int row, int col)
@@ -25,7 +25,7 @@ int& Matrix::At(int row, int col)
     {
     	throw out_of_range("Error: Out of range");
     }
-    return data[row][col];// your implementation here
+    return data[row][col];
 }
 
 const int& Matrix::At(int row, int col) const
@@ -34,17 +34,17 @@ const int& Matrix::At(int row, int col) const
     {
     	throw out_of_range("Error: Out of range");
     }
-    return data[row][col];// your implementation here
+    return data[row][col];
 }
 
 int Matrix::GetRows() const
 {
-   return(numRows); // your implementation here
+   return(numRows); 
 }
 
 int Matrix::GetCols() const
 {
-   return(numCols); // your implementation here
+   return(numCols);
 }
 
 bool Matrix::operator==(const Matrix& m2)
@@ -55,12 +55,12 @@ bool Matrix::operator==(const Matrix& m2)
     	for (int j = 0; j < numCols; j++)
 	    	if (At(i, j) != other.At(i, j))
 		    	return false;
-    return true;// your implementation here
+    return true;
 }
 
 bool Matrix::operator!=(const Matrix& m2)
 {
-    return !(*this == m2);// your implementation here
+    return !(*this == m2);
 }
 
 Matrix Matrix::operator+(const Matrix& m2)
@@ -71,5 +71,5 @@ Matrix Matrix::operator+(const Matrix& m2)
     for (int i = 0; i < numRows; i++)
 	    for (int j = 0; j < numCols; j++)
 	    	result.At(i, j) = At(i, j) + other.At(i, j);
-    return result; // your implementation here
+    return result; 
 }
