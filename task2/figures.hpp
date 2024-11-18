@@ -15,27 +15,55 @@ public:
     virtual FigureType Type() const = 0;
     virtual double Perimeter() const = 0;
     virtual double Area() const = 0;
+    virtual ~Figure() = default;
 };
 
 class Rect : public Figure
 {
+private:
+double width;
+double heigth;
+
+public: 
+    Rect(double width, double heigth);
+    FigureType Type() const override;
+    double Perimeter() const override;
+    double Area() const override;
 };
 
 class Triangle : public Figure
 {
+private:
+    double a, b, c;
+public:
+    Triangle(double a, double b, double c);
+    FigureType Type() const override;
+    double Perimeter() const override;
+    double Area() const override;
 };
 
 class Circle : public Figure
 {
+private:
+    double radius;
+public:
+    Circle(double radius);
+    FigureType Type() const override;
+    double Perimeter() const override;
+    double Area() const override;
 };
 
 std::unique_ptr<Figure> make_figure(FigureType type, double a, double b = 0, double c = 0);
 
 class WrongTriangle : public std::invalid_argument
 {
+public:
+    WrongTriangle() : std::invalid_argument("") {}
 };
 
 class LessThanZeroParam : public std::invalid_argument
 {
+public:
+    LessThanZeroParam() : std::invalid_argument("") {}
 };
 
