@@ -5,23 +5,23 @@
 
 class Matrix {
 public:
-    Matrix() : rows(0), cols(0) {}
+    Matrix() : num_rows(0), num_cols(0) {}
     explicit Matrix(int rows, int cols);
     
     Matrix(const Matrix& other) = default;
     Matrix& operator=(const Matrix& other) = default;
     
-    Matrix(Matrix&& other) noexcept : rows(other.rows), cols(other.cols), data(std::move(other.data)) {
-        other.rows = 0;
-        other.cols = 0;
+    Matrix(Matrix&& other) noexcept : num_rows(other.num_rows), num_cols(other.num_cols), data(std::move(other.data)) {
+        other.num_rows = 0;
+        other.num_cols = 0;
     }
     Matrix& operator=(Matrix&& other) noexcept {
         if (this != &other) {
-            rows = other.rows;
-            cols = other.cols;
+            num_rows = other.num_rows;
+            num_cols = other.num_cols;
             data = std::move(other.data);
-            other.rows = 0;
-            other.cols = 0;
+            other.num_rows = 0;
+            other.num_cols = 0;
         }
         return *this;
     }
@@ -37,7 +37,7 @@ public:
     friend Matrix operator+(const Matrix& lhs, const Matrix& rhs);
 
 private:
-    int rows;
-    int cols;
+    int num_rows;
+    int num_cols;
     std::vector<std::vector<int>> data;
 };
