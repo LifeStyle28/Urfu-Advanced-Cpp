@@ -11,7 +11,7 @@ public:
     Matrix(const Matrix& other) = default;
     Matrix& operator=(const Matrix& other) = default;
     
-    Matrix(Matrix&& other) noexcept : num_rows(other.num_rows), num_cols(other.num_cols), data(std::move(other.data)) {
+    Matrix(Matrix&& other) noexcept : rows(other.rows), cols(other.cols), data(std::move(other.data)) {
         other.rows = 0;
         other.cols = 0;
     }
