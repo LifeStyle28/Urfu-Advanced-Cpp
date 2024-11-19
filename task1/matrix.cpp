@@ -2,61 +2,81 @@
 
 #include <stdexcept>
 
-Matrix::Matrix(int numRows, int numCols) : rows(numRows), cols(numCols), data(numRows * numCols) {
+Matrix::Matrix(int numRows, int numCols)
+{
 if (numRows < 0 || numCols < 0) {
-throw std::invalid_argument("Invalid matrix size");
-}
+throw std::out_of_range("Number of rows and columns must be non-negative");
 }
 
-void Matrix::Reset(int numRows, int numCols) {
+data_.resize(numRows, std::vector<int>(numCols, 0));
+}
+
+void Matrix::Reset(int numRows, int numCols)
+{
 if (numRows < 0 || numCols < 0) {
-throw std::invalid_argument("Invalid matrix size");
-}
-rows = numRows;
-cols = numCols;
-data.assign(numRows * numCols, 0);
+throw std::out_of_range("Number of rows and columns must be non-negative");
 }
 
-int& Matrix::At(int row, int col) {
-if (row < 0 || row >= rows || col < 0 || col >= cols) {
-throw std::out_of_range("Matrix index out of range");
-}
-return data[row * cols + col];
+
+data_.resize(numRows, std::vector<int>(numCols, 0));
 }
 
-const int& Matrix::At(int row, int col) const {
-if (row < 0 || row >= rows || col < 0 || col >= cols) {
-throw std::out_of_range("Matrix index out of range");
-}
-return data[row * cols + col];
-}
-
-int Matrix::GetRows() const {
-return rows;
+int& Matrix::At(int row, int col)
+{
+if (row < 0 || row >= data_.size() || col < 0 || col >= data_[0].size()) {
+throw std::out_of_range("Index out of range");
 }
 
-int Matrix::GetCols() const {
-return cols;
+
+return data_[row][col];
 }
 
-bool Matrix::operator==(const Matrix& m2) {
-if (rows != m2.rows || cols != m2.cols) {
-return false;
-}
-return data == m2.data;
-}
-
-bool Matrix::operator!=(const Matrix& m2) {
-return !(*this == m2);
+const int& Matrix::At(int row, int col) const
+{
+if (row < 0 || row >= data_.size() || col < 0 || col >= data_[0].size()) {
+throw std::out_of_range("Index out of range");
 }
 
-Matrix Matrix::operator+(const Matrix& m2) {
-if (rows != m2.rows || cols != m2.cols) {
-throw std::invalid_argument("Matrices must have the same dimensions for addition");
+return data_[row][col];
 }
-Matrix result(rows, cols);
-for (int i = 0; i < data.size(); i++) {
-result.data[i] = data[i] + m2.data[i];
+
+int Matrix::GetRows() const
+{
+return data_.size();
 }
+
+int Matrix::GetCols() const
+{
+if (data_.empty()) {
+return 0;
+} else {
+return data_[0].size();
+}
+}
+
+bool Matrix::operator==(const Matrix& m2)
+{
+return data_ == m2.data_;
+}
+
+bool Matrix::operator!=(const Matrix& m2)
+{
+return data_ != m2.data_;
+}
+
+Matrix Matrix::operator+(const Matrix& m2)
+{
+if (data_.size() != m2.data_.size() || data_[0].size() != m2.data_[0].size()) {
+throw std::invalid_argument("Matrices must be of the same size for addition");
+}
+  
+Matrix result(data_.size(), data_[0].size());
+
+for (int i = 0; i < data_.size(); ++i) {
+    for (int j = 0; j < data_[0].size(); ++j) {
+        result.At(i, j) = data_[i][j] + m2.At(i, j);
+    }
+}
+
 return result;
 }
