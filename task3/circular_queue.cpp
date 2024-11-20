@@ -1,36 +1,57 @@
 #include "circular_queue.hpp"
 
-CircularQueue::CircularQueue(size_t size)
+CircularQueue::CircularQueue(size_t size) : maxSize(size), front(0), rear(0), count(0)
 {
-	// your implementation here
+	queue.resize(maxSize);
 }
 
 bool CircularQueue::Push(int value)
 {
-    // your implementation here
+	if (Full()) 
+	{
+        	return false;
+        }
+        queue[rear] = value;
+        rear = (rear + 1) % maxSize;
+        count++;
+        return true;
 }
 
 bool CircularQueue::Pop()
 {
-    // your implementation here
+	if (Empty()) 
+	{
+        	return false;
+        }
+        front = (front + 1) % maxSize; 
+        count--;
+        return true;
 }
 
 int CircularQueue::Front() const
 {
-    // your implementation here
+	if (Empty()) 
+	{
+        	return -1;
+        }
+        return queue[front];
 }
 
 int CircularQueue::Back() const
 {
-    // your implementation here
+	if (Empty()) 
+	{
+        	return -1; 
+        }
+        return queue[(rear - 1 + maxSize) % maxSize]; 
 }
 
 bool CircularQueue::Empty() const
 {
-    // your implementation here
+	return count == 0; 
 }
 
 bool CircularQueue::Full() const
 {
-    // your implementation here
+	return count == maxSize;
 }
