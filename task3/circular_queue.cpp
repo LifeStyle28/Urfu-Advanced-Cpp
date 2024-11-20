@@ -5,6 +5,10 @@ CircularQueue::CircularQueue(size_t size) : capacity(size), size(0), front(0), r
     buffer = new int[size];
 }
 
+CircularQueue::~CircularQueue() {
+    delete[] buffer;
+}
+
 bool CircularQueue::Push(int value) {
     if (Full()) {
         return false;
