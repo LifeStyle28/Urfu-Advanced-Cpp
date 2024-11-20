@@ -4,8 +4,8 @@
 
 class CircularQueue {
 private:
-    int* queue;
-    size_t maxSize;
+	int* queue;
+	size_t maxSize;
 	size_t front;
 	size_t rear;
 	size_t count;
