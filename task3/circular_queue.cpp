@@ -1,7 +1,7 @@
 #include "circular_queue.hpp"
 #include <stdexcept>
 
-CircularQueue::CircularQueue(size_t size) : capacity(size), front(0), rear(0), size(0) {
+CircularQueue::CircularQueue(size_t size) : capacity(size), size(0), front(0), rear(0)  {
     buffer = new int[size];
 }
 
