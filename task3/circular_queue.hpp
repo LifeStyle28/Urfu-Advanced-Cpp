@@ -12,15 +12,12 @@ private:
 
 public:
     CircularQueue(size_t size);  // Constructor
-    ~CircularQueue();            // Destructor
-    
-    // Core operations
+
     bool Push(int value);        // Add value to the end
     bool Pop();                  // Remove value from the front
     int Front() const;           // Get front value
     int Back() const;            // Get back value
     
-    // State checks
     bool Empty() const;          // Check if empty
     bool Full() const;           // Check if full
 };
