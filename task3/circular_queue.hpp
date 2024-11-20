@@ -1,10 +1,12 @@
 #pragma once
 
 #include <cstddef>
+#include <vector>
+#include <iostream>
 
 class CircularQueue {
 private:
-	int* queue;
+	std::vector<int> queue;
 	size_t maxSize;
 	size_t front;
 	size_t rear;
