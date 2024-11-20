@@ -1,12 +1,11 @@
-#include "figures.hpp"
-#include <iostream>
+#pragma once
+
 #include <memory>
 #include <stdexcept>
 #include <cmath>
 
-static constexpr double PI = 3.14;
-
-enum class FigureType {
+enum class FigureType
+{
     TRIANGLE,
     CIRCLE,
     RECTANGLE,
@@ -22,96 +21,58 @@ public:
 
 class Rect : public Figure {
 public:
-    Rect(double width, double height) : width_(width), height_(height) {
-        if (width < 0 || height < 0) {
-            throw LessThanZeroParam("Width or height can't be less than zero.");
-        }
-    }
+    Rect(double width, double height) : width(width), height(height) {}
 
-    FigureType Type() const override {
-        return FigureType::RECTANGLE;
-    }
-
-    double Perimeter() const override {
-        return 2 * (width_ + height_);
-    }
-
-    double Area() const override {
-        return width_ * height_;
-    }
+    FigureType Type() const override { return FigureType::RECTANGLE; }
+    double Perimeter() const override { return 2 * (width + height); }
+    double Area() const override { return width * height; }
 
 private:
-    double width_, height_;
+    double width;
+    double height;
 };
 
 class Triangle : public Figure {
 public:
-    Triangle(double a, double b, double c) : a_(a), b_(b), c_(c) {
+    Triangle(double a, double b, double c) : a(a), b(b), c(c) {
         if (a <= 0 || b <= 0 || c <= 0) {
-            throw LessThanZeroParam("Sides must be greater than zero.");
+            throw LessThanZeroParam("Sides must be greater than zero");
         }
-        if (!IsTriangle(a, b, c)) {
-            throw WrongTriangle("The provided sides do not form a valid triangle.");
+        if (a + b <= c || a + c <= b || b + c <= a) {
+            throw WrongTriangle("Invalid triangle sides");
         }
     }
 
-    FigureType Type() const override {
-        return FigureType::TRIANGLE;
-    }
-
-    double Perimeter() const override {
-        return a_ + b_ + c_;
-    }
-
+    FigureType Type() const override { return FigureType::TRIANGLE; }
+    double Perimeter() const override { return a + b + c; }
     double Area() const override {
         double s = Perimeter() / 2;
-        return std::sqrt(s * (s - a_) * (s - b_) * (s - c_));
+        return std::sqrt(s * (s - a) * (s - b) * (s - c));
     }
 
 private:
-    double a_, b_, c_;
-
-    bool IsTriangle(double a, double b, double c) const {
-        return (a + b > c) && (a + c > b) && (b + c > a);
-    }
+    double a;
+    double b;
+    double c;
 };
 
 class Circle : public Figure {
 public:
-    Circle(double radius) : radius_(radius) {
-        if (radius < 0) {
-            throw LessThanZeroParam("Radius can't be less than zero.");
+    Circle(double radius) : radius(radius) {
+        if (radius <= 0) {
+            throw LessThanZeroParam("Radius must be greater than zero");
         }
     }
 
-    FigureType Type() const override {
-        return FigureType::CIRCLE;
-    }
-
-    double Perimeter() const override {
-        return 2 * 3.14 * radius_;
-    }
-
-    double Area() const override {
-        return 3.14 * radius_ * radius_;
-    }
+    FigureType Type() const override { return FigureType::CIRCLE; }
+    double Perimeter() const override { return 2 * PI * radius; }
+    double Area() const override { return PI * radius * radius; }
 
 private:
-    double radius_;
+    double radius;
 };
 
-std::unique_ptr<Figure> make_figure(FigureType type, double a, double b = 0, double c = 0) {
-    switch (type) {
-        case FigureType::TRIANGLE:
-            return std::make_unique<Triangle>(a, b, c);
-        case FigureType::CIRCLE:
-            return std::make_unique<Circle>(a);
-        case FigureType::RECTANGLE:
-            return std::make_unique<Rect>(a, b);
-        default:
-            throw std::invalid_argument("Unknown figure type.");
-    }
-}
+std::unique_ptr<Figure> make_figure(FigureType type, double a, double b = 0, double c = 0);
 
 class WrongTriangle : public std::invalid_argument {
 public:
@@ -122,23 +83,3 @@ class LessThanZeroParam : public std::invalid_argument {
 public:
     explicit LessThanZeroParam(const std::string& message) : std::invalid_argument(message) {}
 };
-
-int main() {
-    try {
-        auto rectangle = make_figure(FigureType::RECTANGLE, 5, 10);
-        std::cout << "Rectangle Area: " << rectangle->Area() << "\n";
-
-        auto circle = make_figure(FigureType::CIRCLE, 3);
-        std::cout << "Circle Area: " << circle->Area() << "\n";
-
-        auto triangle = make_figure(FigureType::TRIANGLE, 3, 4, 5);
-        std::cout << "Triangle Area: " << triangle->Area() << "\n";
-        
-        // Попытка создать неправильный треугольник
-        auto invalid_triangle = make_figure(FigureType::TRIANGLE, 1, 2, 3);
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << '\n';
-    }
-
-    return 0;
-}
