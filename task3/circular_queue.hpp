@@ -8,7 +8,6 @@ private:
     size_t capacity;        // Maximum size of the queue
     size_t front;          // Index of the front element
     size_t rear;           // Index of the rear element
-    bool is_empty;         // Flag to track empty state
 
 public:
     CircularQueue(size_t size);  // Constructor
