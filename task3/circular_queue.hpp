@@ -3,6 +3,13 @@
 #include <cstddef>
 
 class CircularQueue {
+private:
+    int* queue;
+    size_t maxSize;
+	size_t front;
+	size_t rear;
+	size_t count;
+
 public:
     CircularQueue(size_t size); // создать очередь с определенным размером буффера
     bool Push(int value); // добавить значение в конец очереди (false, если очередь заполнена)
