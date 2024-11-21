@@ -1,12 +1,8 @@
 #include "circular_queue.hpp"
-#include <stdexcept>
+#include <vector>
 
-CircularQueue::CircularQueue(size_t size) : capacity(size), size(0), front(0), rear(0)  {
-    buffer = new int[size];
-}
-
-CircularQueue::~CircularQueue() {
-    delete[] buffer;
+CircularQueue::CircularQueue(size_t size) : capacity(size), size(0), front(0), rear(0) {
+    buffer.resize(size);  // Pre-allocate exact size
 }
 
 bool CircularQueue::Push(int value) {
