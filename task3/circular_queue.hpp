@@ -7,6 +7,7 @@ class CircularQueue {
 private:
     std::vector<int> data; // Elements
     size_t capacity;       // Maximum count of elements
+    size_t count;          // Count of elements
     size_t front;          // Index of the front element
     size_t rear;           // Index of the rear element
 
