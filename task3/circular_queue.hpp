@@ -1,18 +1,18 @@
 #pragma once
 
-#include <vector>
 #include <cstddef>
 
 class CircularQueue {
 private:
-    std::vector<int> data; // Elements
-    size_t capacity;       // Maximum count of elements
-    size_t count;          // Count of elements
+    int* buffer;            // Dynamic array to store elements
+    size_t capacity;        // Maximum size of the queue
+    size_t size;           // Current count of elements
     size_t front;          // Index of the front element
     size_t rear;           // Index of the rear element
 
 public:
     CircularQueue(size_t size);  // Constructor
+    ~CircularQueue();  // Destructor
 
     bool Push(int value);        // Add value to the end
     bool Pop();                  // Remove value from the front
