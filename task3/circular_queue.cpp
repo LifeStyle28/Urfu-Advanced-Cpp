@@ -3,7 +3,8 @@
 #include <vector>
 
 CircularQueue::CircularQueue(size_t size) : capacity(size), front(0), rear(0)  {
-    data = std::vector(size);
+    data = std::vector<int>;
+    data.reserve(size);
 }
 
 bool CircularQueue::Push(int value) {
