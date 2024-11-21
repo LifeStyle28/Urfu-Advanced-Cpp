@@ -1,12 +1,11 @@
 #pragma once
 
+#include <vector>
 #include <cstddef>
 
 class CircularQueue {
 private:
-    int* buffer;            // Dynamic array to store elements
-    size_t capacity;        // Maximum size of the queue
-    size_t size;           // Current count of elements
+    std::vector<int> data; // Elements
     size_t front;          // Index of the front element
     size_t rear;           // Index of the rear element
 
