@@ -1,17 +1,17 @@
 #include "circular_queue.hpp"
 #include <stdexcept>
+#include <vector>
 
-CircularQueue::CircularQueue(size_t size) : capacity(size), size(0), front(0), rear(0)  {
-    buffer = new int[size];
+CircularQueue::CircularQueue(size_t size) : capacity(size), front(0), rear(0)  {
+    data = std::vector(size);
 }
 
 bool CircularQueue::Push(int value) {
     if (Full()) {
         return false;
     }
-    buffer[rear] = value;
+    data[rear] = value;
     rear = (rear + 1) % capacity;
-    size++;
     return true;
 }
 
@@ -20,7 +20,6 @@ bool CircularQueue::Pop() {
         return false;
     }
     front = (front + 1) % capacity;
-    size--;
     return true;
 }
 
@@ -28,20 +27,20 @@ int CircularQueue::Front() const {
     if (Empty()) {
         return -1;
     }
-    return buffer[front];
+    return data[front];
 }
 
 int CircularQueue::Back() const {
     if (Empty()) {
         return -1;
     }
-    return buffer[(rear - 1 + capacity) % capacity];
+    return data[(rear - 1 + capacity) % capacity];
 }
 
 bool CircularQueue::Empty() const {
-    return size == 0;
+    return data.size() == 0;
 }
 
 bool CircularQueue::Full() const {
-    return size == capacity;
+    return data.size() == capacity;
 }
