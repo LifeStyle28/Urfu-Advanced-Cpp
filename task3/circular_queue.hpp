@@ -14,6 +14,11 @@ public:
     CircularQueue(size_t size);  // Constructor
     ~CircularQueue();  // Destructor
 
+    CircularQueue(const CircularQueue& other);  // Copy constructor
+    CircularQueue& operator=(const CircularQueue& other);  // Copy assignment
+    CircularQueue(CircularQueue&& other) noexcept;  // Move constructor
+    CircularQueue& operator=(CircularQueue&& other) noexcept;  // Move assignment
+
     bool Push(int value);        // Add value to the end
     bool Pop();                  // Remove value from the front
     int Front() const;           // Get front value
