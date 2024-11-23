@@ -3,6 +3,8 @@
 #include <memory>
 #include <stdexcept>
 
+using namespace std;
+
 static constexpr double PI = 3.14;
 
 enum class FigureType
@@ -57,15 +59,15 @@ public:
 
 std::unique_ptr<Figure> make_figure(FigureType type, double a, double b = 0, double c = 0);
 
-class WrongTriangle : public std::invalid_argument
+class WrongTriangle : public invalid_argument
 {
 public:
-    WrongTriangle() : std::invalid_argument("") {}
+    WrongTriangle(const char* msg) : invalid_argument(msg) {}
 };
 
-class LessThanZeroParam : public std::invalid_argument
+class LessThanZeroParam : public invalid_argument
 {
 public:
-    LessThanZeroParam() : std::invalid_argument("") {}
+    LessThanZeroParam(const char* msg) : invalid_argument(msg) {}
 };
 
