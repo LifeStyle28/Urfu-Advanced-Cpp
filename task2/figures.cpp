@@ -3,12 +3,9 @@
 #include <stdexcept>
 #include <cmath>
 
-Rect::Rect(double a, double b) : width(a), height(b) 
-{ 
-    if (width < 0 || height < 0) {
-            throw LessThanZeroParam("Width or height can't be less than zero.");
-    }
-}
+using namespace std;
+
+Rect::Rect(double a, double b) : width(a), height(b) {}
 
 FigureType Rect::Type() const {
     return FigureType::RECTANGLE;
@@ -22,15 +19,7 @@ double Rect::Area() const {
     return width * height;
 }
 
-Triangle::Triangle(double a, double b, double c) : a(a), b(b), c(c) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-        throw LessThanZeroParam("Sides must be greater than zero.");
-    }
-    
-    if (a + b <= c || a + c <= b || b + c <= a) {
-        throw WrongTriangle("Triangle does not exist.");
-    }
-}
+Triangle::Triangle(double a, double b, double c) : a(a), b(b), c(c) {}
 
 FigureType Triangle::Type() const {
     return FigureType::TRIANGLE;
@@ -46,11 +35,7 @@ double Triangle::Area() const {
 }
 
 
-Circle::Circle(double a) : radius(a) {
-    if (a < 0) {
-        throw LessThanZeroParam("Radius must be non-negative.");
-    }
-}
+Circle::Circle(double a) : radius(a) {}
 
 FigureType Circle::Type() const {
     return FigureType::CIRCLE;
@@ -64,19 +49,29 @@ double Circle::Area() const {
     return PI * radius * radius; 
 }
 
-std::unique_ptr<Figure> make_figure(FigureType type, double a, double b, double c) {
+unique_ptr<Figure> make_figure(FigureType type, double a, double b, double c) {
     if (a < 0 || b < 0 || c < 0) {
         throw LessThanZeroParam("Sides must be greater than zero.");
     }
         
-    switch (type) {
-        case FigureType::RECTANGLE:
-            return std::make_unique<Rect>(a, b);
-        case FigureType::CIRCLE:
-            return std::make_unique<Circle>(a);
-        case FigureType::TRIANGLE:
-            return std::make_unique<Triangle>(a, b, c);
-        default:
-            return nullptr;
+    if (type == FigureType::RECTANGLE) 
+    {
+        return make_unique<Rect>(a, b);
+    } 
+    else if (type == FigureType::CIRCLE) 
+    {
+        return make_unique<Circle>(a);
+    } 
+    else if (type == FigureType::TRIANGLE) 
+    {
+        if (a + b <= c || a + c <= b || b + c <= a) 
+        {
+            throw WrongTriangle("");
+        }
+        return make_unique<Triangle>(a, b, c);
+    }
+    else
+    {
+        return nullptr;
     }
 }
