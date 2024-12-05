@@ -73,7 +73,7 @@ Matrix Matrix::operator+(const Matrix& m2) const {
 
 void Matrix::AllocateMemory() {
     if (m_row > 0 && m_col > 0) {
-        numbers = new int*[m_row]; // Выделяем память для массива строк
+        numbers = new int*[m_row]; // Выделяем память для массива
         for (int i = 0; i < m_row; ++i) {
             numbers[i] = new int[m_col]{0};  // Инициализация нулями
         }
@@ -85,9 +85,9 @@ void Matrix::AllocateMemory() {
 void Matrix::DeallocateMemory() {
     if (numbers) {
         for (int i = 0; i < m_row; ++i) {
-            delete[] numbers[i]; // Освобождаем каждый из массивов строк
+            delete[] numbers[i]; // Освобождаем каждый из массивов
         }
-        delete[] numbers; // Освобождаем массив строк
+        delete[] numbers; // Освобождаем массив
         numbers = nullptr; // Устанавливаем указатель в nullptr для безопасности
     }
 }
