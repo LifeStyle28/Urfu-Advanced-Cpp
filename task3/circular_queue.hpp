@@ -1,8 +1,14 @@
 #pragma once
 
-#include <cstddef>
+#include <vector>
 
 class CircularQueue {
+private:
+    std::vector<int> buffer;            // Dynamic array to store elements
+    size_t capacity;        // Maximum size of the queue
+    size_t size;           // Current count of elements
+    size_t front;          // Index of the front element
+    size_t rear;     
 public:
     CircularQueue(size_t size); // создать очередь с определенным размером буффера
     bool Push(int value); // добавить значение в конец очереди (false, если очередь заполнена)
