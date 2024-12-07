@@ -2,20 +2,38 @@
 
 #include <stdexcept>
 
-Matrix::Matrix(int numRows, int numCols)
+Matrix::Matrix(int rows, int cols) 
 {
-    Reset(numRows, numCols);
+    if (rows < 0 || cols < 0) 
+    {
+        throw out_of_range("Error: Out of range");
+    }
+    if (rows == 0 || cols == 0) 
+    {
+        num_rows = 0;
+        num_cols = 0;
+        data.clear();
+    } else 
+    {
+        num_rows = rows;
+        num_cols = cols;
+        data.assign(rows, vector<int>(cols, 0));
+    }
 }
 
-void Matrix::Reset(int numRows, int numCols)
+void Matrix::Reset(int rows, int cols) 
 {
-    numRows = nrows;
-    numCols = ncols;
-    data.assign(nrows, vector<int>(ncols, 0));
-    if (nrows <= 0 || ncols <= 0)
-    {
-    	nrows = 0;
-	ncols = 0;
+    if (rows < 0 || cols < 0) {
+        throw out_of_range("Error: Out of range");
+    }
+    if (rows == 0 || cols == 0) {
+        num_rows = 0;
+        num_cols = 0;
+        data.clear();
+    } else {
+        num_rows = rows;
+        num_cols = cols;
+        data.assign(rows, vector<int>(cols, 0));
     }
 }
 
@@ -47,29 +65,23 @@ int Matrix::GetCols() const
    return(numCols);
 }
 
-bool Matrix::operator==(const Matrix& m2)
-{
-    if (numCols != other.numCols || numRows != other.numRows)
-	    return false;
-    for (int i = 0; i < numRows; i++)
-    	for (int j = 0; j < numCols; j++)
-	    	if (At(i, j) != other.At(i, j))
-		    	return false;
-    return true;
+bool operator==(const Matrix& m1, const Matrix& m2) {
+    return m1.num_rows == m2.num_rows && m1.num_cols == m2.num_cols && m1.data == m2.data;
 }
 
-bool Matrix::operator!=(const Matrix& m2)
-{
-    return !(*this == m2);
+bool operator!=(const Matrix& m1, const Matrix& m2) {
+    return !(m1 == m2);
 }
 
-Matrix Matrix::operator+(const Matrix& m2)
-{
-    if (numRows != other.num_rows || numCols != other.num_cols)
-	    throw invalid_argument("Error: Different matrix");
-    Matrix result(numRows, numCols);
-    for (int i = 0; i < numRows; i++)
-	    for (int j = 0; j < numCols; j++)
-	    	result.At(i, j) = At(i, j) + other.At(i, j);
-    return result; 
+Matrix operator+(const Matrix& , const Matrix& m2) {
+    if (m1.GetRows() != m2.GetRows() || m1.GetCols() != m2.GetCols()) {
+        throw invalid_argument("");
+    }
+    Matrix result(m1.GetRows(), m1.GetCols());
+    for (int i = 0; i < m1.GetRows(); ++i) {
+        for (int j = 0; j < m1.GetCols(); ++j) {
+            result.At(i, j) = m1.At(i, j) + m2.At(i, j);
+        }
+    }
+    return result;
 }
