@@ -2,6 +2,8 @@
 
 class Matrix
 {
+private:
+	vector<vector<float>> mat;
 public:
     Matrix() = default;
     Matrix(int numRows, int numCols);
