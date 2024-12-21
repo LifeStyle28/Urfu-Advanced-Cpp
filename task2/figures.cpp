@@ -5,9 +5,9 @@ static constexpr double PI = 3.14;
 //Triangle
 Triangle::Triangle(int a, int b, int c) : A(a), B(b), C(c) 
 {
-    if (A + B < C || C + B < A || A + C < B)
+    if (A + B <= C || C + B <= A || A + C <= B)
     {
-        throw WrongTriangle("Треугольника не существует");
+        throw WrongTriangle("Треугольник не существует");
     } 
     
 }
