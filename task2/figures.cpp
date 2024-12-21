@@ -79,6 +79,6 @@ std::unique_ptr<Figure> make_figure(FigureType type, double a, double b, double 
         case FigureType::RECTANGLE:
             return std::make_unique<Rect>(static_cast<int>(a), static_cast<int>(b), static_cast<int>(c));
         default:
-            throw std::invalid_argument("Неизвестный тип фигуры");
+            return nullptr;
     }
 }
