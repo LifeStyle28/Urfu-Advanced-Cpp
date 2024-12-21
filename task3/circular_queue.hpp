@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <vector>
 
 class CircularQueue {
 public:
@@ -11,4 +12,10 @@ public:
     int Back() const; // получить значение из конца очереди (-1, если очередь пустая)
     bool Empty() const; // проверить пустая ли очередь
     bool Full() const; // проверить заполнена ли очередь
+private:
+    size_t buffer_size = 0;
+    size_t buffer_capacity;
+    size_t front = 0;
+    size_t rear = 0;
+    std::vector<int> buffer; 
 };
