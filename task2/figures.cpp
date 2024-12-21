@@ -5,11 +5,6 @@ static constexpr double PI = 3.14;
 //Triangle
 Triangle::Triangle(int a, int b, int c) : A(a), B(b), C(c) 
 {
-    if (A <= 0 || B <= 0 || C <= 0) 
-    {
-        throw LessThanZeroParam("Стороны треугольника должны быть больше нуля");
-    }
-
     if (A + B < C || C + B < A || A + C < B)
     {
         throw WrongTriangle("Треугольника не существует");
@@ -34,13 +29,7 @@ FigureType Triangle::Type() const
 }
 
 //Circle
-Circle::Circle(int r, int /*unused_b*/, int /*unused_c*/) : R(r)
-{
-    if (R <= 0) 
-    {
-        throw LessThanZeroParam("Радиус окуржности должен быть больше нуля");
-    }
-}
+Circle::Circle(int r, int /*unused_b*/, int /*unused_c*/) : R(r) {}
 
 double Circle::Perimeter() const
 {
@@ -58,13 +47,7 @@ FigureType Circle::Type() const
 }
 
 //Rectangle
-Rect::Rect(int a, int b, int /*unused_c*/) : A(a), B(b)
-{
-    if (A <= 0 || B <= 0) 
-    {
-        throw LessThanZeroParam("Стороны прямоугольника должны быть больше нуля");
-    }
-}
+Rect::Rect(int a, int b, int /*unused_c*/) : A(a), B(b) {}
 
 double Rect::Perimeter() const
 {
@@ -83,7 +66,10 @@ FigureType Rect::Type() const
 
 //make_figure realization
 std::unique_ptr<Figure> make_figure(FigureType type, double a, double b, double c) 
-{   
+{   if (a < 0 || a < 0 || b < 0) 
+    {
+        throw LessThanZeroParam("Параметры фигуры должны быть больше нуля");
+    }
     switch (type) 
     {
         case FigureType::TRIANGLE:
