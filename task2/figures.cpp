@@ -66,7 +66,7 @@ FigureType Rect::Type() const
 
 //make_figure realization
 std::unique_ptr<Figure> make_figure(FigureType type, double a, double b, double c) 
-{   if (a < 0 || a < 0 || b < 0) 
+{   if (a < 0 || b < 0 || c < 0) 
     {
         throw LessThanZeroParam("Параметры фигуры должны быть больше нуля");
     }
